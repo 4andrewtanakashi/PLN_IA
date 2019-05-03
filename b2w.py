@@ -21,9 +21,13 @@ class B2W:
         # Extrai os dados do HTML
         soup = BeautifulSoup(page.content, 'html.parser')
         res = soup.find_all("td")
+        #<h1 class="product-title__TitleUI-sc-116vf1e-0 fhQQvU TitleH1-c6mv26-0 lgUBdv" id="product-name-default" icon="[object Object]">Notebook Essentials E30 Intel Core I3 4GB 1TB LED Full HD 15.6'' W10 Cinza Titânio - Samsung</h1>#
+
+        h1 = soup.find_all("h1")
 
         # Dicionário para armazenar as propriedades do produto
         values = dict()
+        values['title'] = h1[2].get_text().encode('utf8')
 
         # Recupera cada par; propriedade e valor
         for idx in range(0, len(res), 2):

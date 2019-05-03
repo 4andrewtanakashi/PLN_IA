@@ -1,2 +1,4 @@
+request
 beautifulsoup4
 tqdm
+requests
