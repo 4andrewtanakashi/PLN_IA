@@ -45,7 +45,7 @@ class B2W:
     def Get_Properties_By_Cods(codes, sleep = 0.5):
                 
         prods = list()
-        for code in tqdm(codes, desc='Downloading properties by {} products'.format(len(codes))):
+        for code in tqdm(codes, desc='Downloading properties by {} products'.format(len(codes)) ):
             url = '//www.amazon.com.br/gp/product/{}'.format(code)
             prods.append(B2W.Get_Properties_By_Prod(url))
             time.sleep(sleep + random.randint(-5, 5)/20)
