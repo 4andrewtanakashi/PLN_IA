@@ -21,18 +21,13 @@ class B2W:
         # Extrai os dados do HTML
         soup = BeautifulSoup(page.content, 'html.parser')
         res = soup.find_all("td")
-
-        for i in res:
-            print(i)
         #<h1 class="product-title__TitleUI-sc-116vf1e-0 fhQQvU TitleH1-c6mv26-0 lgUBdv" id="product-name-default" icon="[object Object]">Notebook Essentials E30 Intel Core I3 4GB 1TB LED Full HD 15.6'' W10 Cinza Titânio - Samsung</h1>#
 
-        span = soup.find_all("span")
+        h1 = soup.find_all("h1")
 
-        for j in span:
-            print(j)
         # Dicionário para armazenar as propriedades do produto
         values = dict()
-        values['title'] = span[0].get_text().encode('utf8')
+        values['title'] = h1[2].get_text().encode('utf8')
 
         # Recupera cada par; propriedade e valor
         for idx in range(0, len(res), 2):
@@ -45,25 +40,24 @@ class B2W:
     def Get_Properties_By_Cods(codes, sleep = 0.5):
                 
         prods = list()
-        for code in tqdm(codes, desc='Downloading properties by {} products'.format(len(codes)) ):
-            url = '//www.amazon.com.br/gp/product/{}'.format(code)
+        
+        for code in tqdm(codes, desc='Downloading properties by {} products'.format(len(codes))):
+            url = 'https://www.submarino.com.br/produto/{}'.format(code)
             prods.append(B2W.Get_Properties_By_Prod(url))
-            time.sleep(sleep + random.randint(-5, 5)/20)
-            print(code)
-
+            time.sleep(abs(sleep + random.randint(-5, 5)/20))
+        
         return prods
     
     
     # Recupera os IDs dos produtos de uma determina categoria (URL)
     @staticmethod
     def Get_Prod_Codes_By_Cat(url, count_limit, sleep = 0.5):
-        pattern1 = 'TouchableA-sc-9v9alh-0 bCFQWo" href="/product/'
-        pattern2 = 'ref='
+        
+        pattern1 = 'TouchableA-sc-9v9alh-0 bCFQWo" href="/produto/'
+        pattern2 = '?pfm_carac='
         limite = 24
         offset = 0
         url += '?limite={}&offset={}'
-
-        #https://www.americanas.com.br/produto/133621821/notebook-samsung-expert-x40-intel-core-8a-i5-quad-core-8gb-geforce-mx110-com-2gb-1tb-tela-led-hd-15-6-windows-10-cinza-titanio?pfm_carac=Notebook&pfm_index=1&pfm_page=category&pfm_pos=grid&pfm_type=vit_product_grid&sellerId&voltagem=BIVOLT
 
         codeList = list()
         oldSize = len(codeList)
@@ -117,7 +111,7 @@ class B2W:
                 # Muda offset da página para nova leitura
                 offset += limite
                 logging.info('{} IDs extraídos'.format(oldSize))
-                time.sleep(sleep + random.randint(-5, 5)/20)
+                time.sleep(abs(sleep + random.randint(-5, 5)/20))
 
         return codeList
 

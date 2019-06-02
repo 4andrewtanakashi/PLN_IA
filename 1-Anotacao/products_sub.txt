@@ -1,0 +1,44 @@
+{
+    "title": "Tablet DL Creative Tab, Tela 7”, 8GB, Câmera, Wi-Fi, Android 7 e Processador Quad Core de 1.2 GHz", 
+    "Marca": "DL", 
+    "Memória Interna": "8GB", 
+    "Código de barras": "7898567773047", 
+    "Processador": "Quad Core", 
+    "Memória Ram": "1GB", 
+    "Código": "26476624"
+}
+
+{
+    "title": "Tablet Dazz Mx7 Quad Core, 7 Polegadas, Wi-fi, 512mb, 8gb, Android 5.1, Preto - 69182", 
+    "Conexões": "Wi-Fi, 3G", 
+    "Código de barras": "7897975072773", 
+    "Alimentação, tipo de bateria": "2.700 mAh", 
+    "Processador": "Quad Core", 
+    "Memória Interna": "8GB", 
+    "Memória Ram": "512MB", 
+    "Código": "23178300", 
+    "Tamanho do Display": "7\""
+}
+
+{
+    "Código de barras": "", 
+    "Código": "35537406", 
+    "title": "Calculadora Casio Fx-95ES Plus Cienti Pr"
+}
+
+{
+    "Código de barras": "7898643340477", 
+    "Código": "24193857", 
+    "title": "Tablet Zagg Z Tab 7 Pc 722 Preto com Tela 7, 4GB, Câmera Vga, Suporte à Modem 3G, Wi-Fi, Android 4"
+}
+
+{
+    "COMPRIMENTO": ".9", 
+    "title": "Tablet M7s Tela 7 Processador Quad-Core 1.2GHz Android 4.4 8GB de Memória Wi-Fi", 
+    "Código de barras": "7898506478637", 
+    "LARGURA": "11", 
+    "VOLTAGEM": "Bvolt", 
+    "Código": "13651101", 
+    "ALTURA": "18"
+}
+
