@@ -82,12 +82,12 @@ while True:
 #        print(x)
         lisAmer.append(data[x]["title"])
 
-        if "Modelo" in x:
+        if "Modelo" in data[x]:
             lAmeMod.append(data[x]["Modelo"])
         else:
             lAmeMod.append(" ")
 
-        if "Softwares inclusos" in x:
+        if "Softwares inclusos" in data[x]:
             lAmeSisInc.append(data[x]["Softwares inclusos"])
         else:
             lAmeSisInc.append(" ")
@@ -97,7 +97,7 @@ while True:
             break
         lisBah.append(data[y]["title"])
 #        print(y)
-        if "Softwares inclusos" in y:
+        if "Softwares inclusos" in data[y]:
             lBahSisInc.append(data[y]["Softwares inclusos"])
         else:
             lBahSisInc.append(" ")
@@ -120,4 +120,4 @@ arq2.close()
 data = {"x0_amer":lisAmer, "x1_ameMod": lAmeMod, "x2_ameSoftInc": lAmeSisInc, "x3_bahia":lisBah, "x4_bahSoftInc": lBahSisInc, "y":lisM}
 df = pd.DataFrame(data)
 
-print(df)
+#print(df)
