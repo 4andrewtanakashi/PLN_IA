@@ -66,9 +66,13 @@ arq2 = open("matching2.txt", "r")
 lisAmer = []
 lAmeMod = []
 lAmeSisInc = []
+lAmeProc = []
+lAmePlVid = []
 
 lisBah = []
 lBahSisInc = []
+lBahProc = []
+lBahPlVid = []
 
 lisM = []
 
@@ -92,6 +96,16 @@ while True:
         else:
             lAmeSisInc.append(" ")
 
+        if "Processador" in data[x]:
+            lAmeProc.append(data[x]["Processador"])
+        else:
+            lAmeProc.append(" ")
+
+        if "Placa de vídeo" in data[x]:
+            lAmePlVid.append(data[x]["Placa de vídeo"])
+        else:
+            lAmePlVid.append(" ")
+
         y = arq2.readline().rstrip()
         if (y == ''):
             break
@@ -102,6 +116,15 @@ while True:
         else:
             lBahSisInc.append(" ")
 
+        if "Processador" in data[y]:
+            lBahProc.append(data[y]["Processador"])
+        else:
+            lBahProc.append(" ")
+
+        if "Placa de vídeo" in data[y]:
+            lBahPlVid.append(data[y]["Placa de vídeo"])
+        else:
+            lBahPlVid.append(" ")
 
 
         z = arq2.readline().rstrip()
@@ -117,7 +140,11 @@ while True:
 #print(lista)
 arq2.close()
 
-data = {"x0_amer":lisAmer, "x1_ameMod": lAmeMod, "x2_ameSoftInc": lAmeSisInc, "x3_bahia":lisBah, "x4_bahSoftInc": lBahSisInc, "y":lisM}
+data = {"x0_amer":lisAmer, "x1_ameMod": lAmeMod, "x2_ameSoftInc": lAmeSisInc,
+        "x3_AmeProc":lAmeProc, "x4_AmePlacVid":lAmePlVid, "x5_bahia":lisBah,
+        "x6_bahSoftInc": lBahSisInc, "x7_BahProc":lBahProc, "x8_BahPlacVid": lBahPlVid,
+        "y":lisM
+        }
 df = pd.DataFrame(data)
 
 #print(df)
