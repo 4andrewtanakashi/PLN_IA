@@ -63,9 +63,16 @@ with open("product.json") as file:
 # ler o arquivo reescrito
 # formatacao melhorada
 arq2 = open("matching2.txt", "r")
-lista = []
-lista2 = []
+lisAmer = []
+lAmeMod = []
+lAmeSisInc = []
+
+lisBah = []
+lBahSisInc = []
+
 lisM = []
+
+
 while True:
     try:
         x = arq2.readline().rstrip()
@@ -73,13 +80,29 @@ while True:
         if (x == ''):
             break
 #        print(x)
-        lista.append(data[x]["title"])
+        lisAmer.append(data[x]["title"])
+
+        if "Modelo" in x:
+            lAmeMod.append(data[x]["Modelo"])
+        else:
+            lAmeMod.append(" ")
+
+        if "Softwares inclusos" in x:
+            lAmeSisInc.append(data[x]["Softwares inclusos"])
+        else:
+            lAmeSisInc.append(" ")
 
         y = arq2.readline().rstrip()
         if (y == ''):
             break
-        lista2.append(data[y]["title"])
+        lisBah.append(data[y]["title"])
 #        print(y)
+        if "Softwares inclusos" in y:
+            lBahSisInc.append(data[y]["Softwares inclusos"])
+        else:
+            lBahSisInc.append(" ")
+
+
 
         z = arq2.readline().rstrip()
         if (z == ''):
@@ -94,7 +117,7 @@ while True:
 #print(lista)
 arq2.close()
 
-data = {"x0_amer":lista, "x1_bahia":lista2, "y":lisM}
+data = {"x0_amer":lisAmer, "x1_ameMod": lAmeMod, "x2_ameSoftInc": lAmeSisInc, "x3_bahia":lisBah, "x4_bahSoftInc": lBahSisInc, "y":lisM}
 df = pd.DataFrame(data)
 
 print(df)
