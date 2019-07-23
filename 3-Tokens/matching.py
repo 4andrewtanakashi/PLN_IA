@@ -1,6 +1,7 @@
 import ast
 import json
 import nltk
+nltk.download()
 import string
 import pandas as pd
 
