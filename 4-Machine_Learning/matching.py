@@ -140,4 +140,46 @@ data = {"x0_amer":lisAmer, "x1_ameMod": lAmeMod, "x2_ameSoftInc": lAmeSisInc, "x
         }
 df = pd.DataFrame(data)
 
+X = lisT
+Y = lisM
+
+from sklearn.model_selection import train_test_split
+X_train, x_test, Y_train, y_test = train_test_split(X, Y, test_size=0.2)
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neural_network import MLPClassifier
+
+LR = LogisticRegression()
+SVM = SVC()
+DT = DecisionTreeClassifier()
+RF = RandomForestClassifier()
+MLP = MLPClassifier()
+
+print("LogisticRegression")
+LR.fit(X_train, Y_train)
+print("SupportVectorMachines")
+SVM.fit(X_train, Y_train)
+print("DecisionTreeClassifier")
+DT.fit(X_train, Y_train)
+print("RandomForestClassifier")
+RF.fit(X_train, Y_train)
+print("MultLayerPerceptron")
+MLP.fit(X_train, Y_train)
+
+from sklearn.metrics import accuracy_score
+
+print("LogisticRegression")
+print(accuracy_score(y_test, LR.predict(x_test)))
+print("SupportVectorMachines")
+print(accuracy_score(y_test, SVM.predict(x_test)))
+print("DecisionTreeClassifier")
+print(accuracy_score(y_test, DT.predict(x_test)))
+print("RandomForestClassifier")
+print(accuracy_score(y_test, RF.predict(x_test)))
+print("MultLayerPerceptron")
+print(accuracy_score(y_test, MLP.predict(x_test)))
+
 #print(df)
