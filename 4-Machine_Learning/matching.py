@@ -5,6 +5,8 @@ nltk.download()
 import string
 import pandas as pd
 
+from sklearn.feature_extraction.text import CountVectorizer
+
 with open('matching', 'r') as f:
     lista = ast.literal_eval(f.read())
 
@@ -100,48 +102,36 @@ while True:
 
 arq2.close()
 
-
-stopwords_list = nltk.corpus.stopwords.words('portuguese')
-
-def tokenize_words(t):
-    return nltk.tokenize.word_tokenize(t)
-
-def remove_stopwords(tokens):
-    return [t for t in tokens if t not in stopwords_list]
-
-def remove_punctuation(t):
-    return t.translate(str.maketrans('','',string.punctuation))
-
-def word_overlap(t1, t2):
-    tokens1 = remove_stopwords(tokenize_words(remove_punctuation(t1)))
-    tokens2 = remove_stopwords(tokenize_words(remove_punctuation(t2)))
-    matches = [1 for t in tokens1 if t in tokens2]
-    return sum(matches) / (len(tokens1) + len(tokens2))
-
-
-textAme = ""
-textBah = ""
-lisT = []
-palavraTest = "Para ficar ainda melhor"
-
-for i in range(len(lisAmer)):
-    textAme += lisAmer[i] + lAmeMod[i] + lAmeSisInc[i] + lAmeProc[i] + lAmePlVid[i]
-    textBah += lisBah[i] + lBahSisInc[i] + lBahProc[i] + lBahPlVid[i]
-    #if (not (palavraTest in lBahSisInc[i])):
-    #    textBah += lisBah[i] + lBahSisInc[i] + lBahProc[i] + lBahPlVid[i]
-    #else:
-    #    textBah += lisBah[i] + lBahProc[i] + lBahPlVid[i]
-    token = word_overlap(textAme, textBah)
-    lisT.append(token)
-
 data = {"x0_amer":lisAmer, "x1_ameMod": lAmeMod, "x2_ameSoftInc": lAmeSisInc, "x3_AmeProc":lAmeProc, "x4_AmePlacVid":lAmePlVid, 
         "x5_bahia":lisBah, "x6_bahSoftInc": lBahSisInc, "x7_BahProc":lBahProc, "x8_BahPlacVid": lBahPlVid,
         "x":lisT, "y":lisM
         }
 df = pd.DataFrame(data)
 
-X = lisT
-Y = lisM
+data1 = {"x0_amer":lisAmer, "x1_ameMod": lAmeMod, "x2_ameSoftInc": lAmeSisInc, "x3_AmeProc":lAmeProc, "x4_AmePlacVid":lAmePlVid, 
+        "x5_bahia":lisBah, "x6_bahSoftInc": lBahSisInc, "x7_BahProc":lBahProc, "x8_BahPlacVid": lBahPlVid,
+        }
+df1 = pd.DataFrame(data1)
+
+dictToken = dict()
+index = 0
+for lista in df1.values:
+    vectorizer = CountVectorizer()
+    vectorizer.fit(lista)
+    vectorz = vectorizer.transform(lista)
+    vectToken = list()
+    for elem in vectorz.toarray() :
+        value = ""
+        for i in range(len(elem)):
+            value += str(elem[i])
+        vectToken.append(int(value))
+    dictToken[str(index)] = vectToken
+    index += 1
+
+dfToken = pd.DataFrame(dictToken).T
+
+X = dfToken.values
+Y = df["y"].values
 
 from sklearn.model_selection import train_test_split
 X_train, x_test, Y_train, y_test = train_test_split(X, Y, test_size=0.2)
