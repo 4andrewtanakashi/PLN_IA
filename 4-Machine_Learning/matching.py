@@ -121,9 +121,9 @@ for lista in df1.values:
     vectorz = vectorizer.transform(lista)
     vectToken = list()
     for elem in vectorz.toarray() :
-        value = ""
+        value = 0
         for i in range(len(elem)):
-            value += str(elem[i])
+            value += elem[i]
         vectToken.append(int(value))
     dictToken[str(index)] = vectToken
     index += 1
